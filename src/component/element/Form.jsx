@@ -6,21 +6,27 @@ import Button from './Button';
 export default function Form({title, setEmail, setPassword, handleAction }) {
   return (
     <div  className=' text-center  my-5'>
-         <div className='text-center my-5'>
-         <h1>
+         <div className=' my-5'>
+         <h1 className='fw-bold display-1 text-danger'>
           {title}
           </h1>
         
          </div>
-         <Box
+         <Box 
         component="form"
         sx={{
-          "& > :not(style)": { m: 1, width: "25ch" },
+          "& > :not(style)": { m:60, width: "25ch" },
         }}
         noValidate
         autoComplete="off"
       >
-        <TextField
+   
+
+        <div className="card  my-5 rounded-5  bg-info"  style={{width: '28rem', height:'22rem'}}>
+
+          <div className="cad-body text-center">
+
+          <TextField className='  bg-white  mt-5 '
           id="email"
           label="Email"
           type="email"
@@ -28,7 +34,8 @@ export default function Form({title, setEmail, setPassword, handleAction }) {
           onChange={(e) => setEmail (e.target.value)}
 
         />
-        <TextField
+        <br />
+        <TextField className=' bg-white  border-none my-4'
           id="password"
           label="Password"
           type="password"
@@ -37,7 +44,10 @@ export default function Form({title, setEmail, setPassword, handleAction }) {
 
         />
         <br />
-        <Button title={title } handleAction={handleAction} />
+        <Button className="btn btn-danger rounded-3 my-4" title={title } handleAction={handleAction} />
+          </div>
+        
+      </div>
       </Box>
     </div>
   )
