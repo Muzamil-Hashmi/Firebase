@@ -2,19 +2,23 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./component/element/Home";
+
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import Form from "./component/element/Form";
-import { app } from "./firebase";
+import app, { db } from "./firebase";
 import {
   getAuth,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { addDoc, collection } from "firebase/firestore";
+import Forget from "./component/element/Forget";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -28,6 +32,20 @@ function App() {
     }
   }, []);
 
+  const updateEmail = () => {
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        if (error.code == "auth/user-not-found") {
+          toast.error("please check the email");
+        }
+        // ..
+      });
+  };
+
   const handleAction = (id) => {
     console.log(id);
     const authentication = getAuth();
@@ -38,6 +56,14 @@ function App() {
           console.log(res);
 
           sessionStorage.setItem("auth", res._tokenResponse.refreshToken);
+          addDoc(collection(db, "Users"), {
+            email: email,
+            password: password,
+          });
+          //   addDoc(collection(db,"auth"),{
+          //     email:email,
+          //     password:password
+          //   });
         })
         .catch((e) => {
           if (e.code == "auth/wrong-password") {
@@ -68,9 +94,19 @@ function App() {
   return (
     <>
       <>
-        <ToastContainer /> 
+        <ToastContainer />
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route
+            path="/forget"
+            element={
+              <Forget
+                setEmail={setEmail}
+                updateEmail={() => updateEmail()}
+                title="forget "
+              />
+            }
+          />
           <Route
             path="/login"
             element={
