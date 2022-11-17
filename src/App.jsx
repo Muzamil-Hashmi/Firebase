@@ -19,6 +19,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addDoc, collection } from "firebase/firestore";
 import Forget from "./component/element/Forget";
+import Hero from "./component/element/Hero";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -129,6 +130,9 @@ function App() {
               />
             }
           />
+          <Route
+          path="/Hero"
+          element={<Hero/>}/>
         </Routes>
       </>
     </>
