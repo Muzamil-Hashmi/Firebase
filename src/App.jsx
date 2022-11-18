@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { addDoc, collection } from "firebase/firestore";
 import Forget from "./component/element/Forget";
 import Hero from "./component/element/Hero";
+import Edit from "./component/element/Edit";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -133,6 +134,13 @@ function App() {
           <Route
           path="/Hero"
           element={<Hero/>}/>
+           <Route
+          path="/edit/:id"
+          element={<Edit/>}/>
+
+<Route
+          path="register"
+          element={<Forget/>}/>
         </Routes>
       </>
     </>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextField,Box } from '@mui/material'
 import Button from './Button';
+import {Link}  from "react-router-dom"
 
 
 export default function Form({title, setEmail, setPassword, handleAction }) {
@@ -46,6 +47,7 @@ export default function Form({title, setEmail, setPassword, handleAction }) {
         <br />
         <Button className="btn btn-danger rounded-3 my-4" title={title } handleAction={handleAction} />
           </div>
+        { title == 'register' ? <Link  to="/login"  className="btn btn-danger rounded-3 my-4">{title}</Link> : <Link  to="/register"  className="btn btn-danger rounded-3 my-4">{title}</Link>}
         
       </div>
       </Box>

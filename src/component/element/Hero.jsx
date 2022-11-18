@@ -3,6 +3,8 @@ import React from "react";
 import { useState } from "react";
 import { collection, getDocs,deleteDoc,doc } from "firebase/firestore"; 
 import {db}from '../../firebase'
+import {Link} from "react-router-dom"
+
 
 
 
@@ -25,7 +27,7 @@ export default function Hero() {
       // console.log("Document data:", data);
     };
     getUsers();
-  },[]);
+  });
   
 
   return (
@@ -40,6 +42,8 @@ export default function Hero() {
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Adress</th>
+      <th scope="col">File</th>
+
       <th scope="col">Delete</th>
       <th scope="col">edit</th>
 
@@ -50,11 +54,13 @@ export default function Hero() {
 
       return(
         <tr>
-        <th scope="row">1</th>
-        <td>{user.name}</td>
-        <td>{user.adress}</td>
-        <td><button className="btn   btn-danger" onClick={Delete((user.id))}>delete</button></td>
-        <td><button className="btn   btn-primary" >Edit</button></td>
+        <th className="table-secondary" scope="row">1</th>
+        <td className="table-secondary">  {user.name}</td>
+        <td className="table-secondary">{user.adress}</td>
+        <td className="table-secondary">{user.file}</td>
+
+        <td className="table-secondary"><button className="btn   btn-danger" onClick= {()  =>Delete((user.id))}>delete</button></td>
+        <td className="table-secondary"><Link className="btn   btn-primary" to={`/edit/${user.id}`} >Edit</Link></td>
         
         
       </tr>
@@ -62,7 +68,7 @@ export default function Hero() {
 
 
      
-    })};
+    })}
    
 
    

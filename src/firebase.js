@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { doc, setDoc } from "firebase/firestore"; 
 import { collection, addDoc } from "firebase/firestore"; 
+import {getStorage} from 'firebase/storage'
 
 import {getFirestore} from "firebase/firestore";
 
@@ -22,3 +23,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export default app;
 export const db= getFirestore(app);
+export const storage = getStorage();
